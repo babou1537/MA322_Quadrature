@@ -397,7 +397,7 @@ print("Calcul de la trajectoire avec la méthode de Verlet terminé.")
 
 
 """xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    III-3) Comparaisons
+    III-3) Comparaisons des 3 méthodes
    ----------------------------------------------------------------
 """
 def comparaisonPlot(trajectoire_euler, trajectoire_rk4, trajectoire_verlet):
@@ -602,7 +602,9 @@ def PhaseSpacePlot(angles, angular_velocities):
 
 # PhaseSpacePlot(angles, angular_velocities)
 
-"""xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+"""xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     Représentations
    ----------------------------------------------------------------
 """
