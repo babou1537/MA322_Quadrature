@@ -112,7 +112,7 @@ print("Calcul de la trajectoire avec la méthode d'Euler explicite terminé.")
     5) Visualiser et sauvegarder
     ----------------------------------------------------------------
 """
-def anglePlot(angles, time_points):
+def anglePlot(angles, time_points, alpha=None):
     """
     Trace les valeurs de θ1(t) et θ2(t) en fonction du t = tn, n = 0,...,N
 
@@ -123,16 +123,26 @@ def anglePlot(angles, time_points):
     Returns:
         None
     """
+    plt.figure(figsize=(8, 6))
     plt.plot(time_points, angles[0], label='θ1')
     plt.plot(time_points, angles[1], label='θ2')
     plt.xlabel('Temps')
     plt.ylabel('Angles (radians)')
     plt.title('Évolution des angles θ1 et θ2 en fonction du temps')
     plt.legend()
+
+    # if alpha != None:
+    #     # plt.suptitle(f"- Pour Alpha = {str(alpha)} -")
+    #     # plt.savefig(f'FIG4_{alpha}_angularEvolution.png', dpi=600)
+
+    #     plt.suptitle(f"- {str(alpha)} -")
+    #     plt.savefig('FIG1-2_angularEvolution.png', dpi=600)
+
+
     # plt.savefig('angularEvolution.pdf')
     plt.show()
 
-def angularVelocityPlot(angular_velocities, time_points):
+def angularVelocityPlot(angular_velocities, time_points, alpha=None):
     """
     Trace les valeurs des vitesses angulaires (θ1_dot(t), θ2_dot(t)) en fonction du temps
 
@@ -143,14 +153,24 @@ def angularVelocityPlot(angular_velocities, time_points):
     Returns:
         None
     """
+    plt.figure(figsize=(8, 6))
     plt.plot(time_points, angular_velocities[0], label='θ1_dot')
     plt.plot(time_points, angular_velocities[1], label='θ2_dot')
     plt.xlabel('Temps')
     plt.ylabel('Vitesses angulaires (radians/s)')
     plt.title('Évolution des vitesses angulaires θ1_dot et θ2_dot en fonction du temps')
     plt.legend()
+
+    # if alpha != None:
+        # plt.suptitle(f"- Pour Alpha = {str(alpha)} -")
+        # plt.savefig(f'FIG4_{alpha}angularVelocityEvolution.png', dpi=600)
+
+        # plt.suptitle(f"- {str(alpha)} -")
+        # plt.savefig('FIG1-2_angularVelocityEvolution.png', dpi=600)
+
     # plt.savefig('angularVelocityEvolution.pdf')
     plt.show()
+
 
 def calcul_trajectoire(angle,l1,l2):
     # Séparer les angles theta1 et theta2 de la liste d'angles
@@ -167,7 +187,7 @@ def calcul_trajectoire(angle,l1,l2):
 
     return x1,y1,x2,y2
 
-def plot_trajectory(angle,l1,l2):
+def plot_trajectory(angle,l1,l2, subtitle=None):
     """
     Trace la trajectoire du double pendule en fonction des angles et des longueurs des pendules.
 
@@ -186,6 +206,9 @@ def plot_trajectory(angle,l1,l2):
     plt.title('Trajectoire du double pendule')
     plt.legend()
     plt.grid(True)
+    # if subtitle != None:
+    #     plt.suptitle(subtitle)
+        # plt.savefig('FIG2_trajectoire_Verlet.png', dpi=600)
     # plt.savefig('trajectory.pdf')
     plt.show()
 
@@ -435,6 +458,8 @@ def comparaisonPlot(trajectoire_euler, trajectoire_rk4, trajectoire_verlet):
     plt.title('Comparaison des trajectoires avec différentes méthodes')
     plt.legend()
     plt.grid(True)
+
+    # plt.savefig('FIG3_compraisonMethodes.png', dpi=600)
     plt.show()
 
 
@@ -558,7 +583,7 @@ def animate_trajectory_comparison(angle_euler, angle_rk4, angle_verlet, l1, l2, 
     ----------------------------------------------------------------
 """
 #1/
-def PhaseSpacePlot(angles, angular_velocities):
+def PhaseSpacePlot(angles, angular_velocities, alpha=None):
     """
     Trace les courbes Ci dans le plan R2 définies par (θi(t), θ'i(t)) : t ∈ [0, T].
 
@@ -578,6 +603,10 @@ def PhaseSpacePlot(angles, angular_velocities):
     ax.set_ylabel(r'Vitesse angulaire $\dot{\theta}$')
     ax.set_title('Espace des phases')
     ax.legend()
+
+    if alpha != None:
+        plt.suptitle(f"- Pour Alpha = {str(alpha)} -")
+        # plt.savefig(f'FIG4_{alpha}_phase.png', dpi=600)
     
     plt.show()
 
@@ -626,98 +655,99 @@ def calculer_trajectoire_pour_conditions_initiales(Y0, T, N, l1, l2, m1, m2, met
     Représentations
     ----------------------------------------------------------------
 """
-"""METHODE Euler Explicite"""
-# anglePlot(angles, time_points)
-# angularVelocityPlot(angular_velocities, time_points)
-# plot_trajectory(angles, l1, l2)
-# print("Animation de la trajectoire avec la méthode d'Euler explicite...")
-# animate_trajectory(angles, l1, l2,"Euler Explicite")
-# print("Animation de la trajectoire avec la méthode d'Euler explicite terminée.")
-# print()
-# energyEvolution(ET, time_points)
-
-"""METHODE RK4"""
-# plot_trajectory(angles_rk4, l1, l2)
-# print("Animation de la trajectoire avec la méthode de Runge-Kutta d'ordre 4...")
-# animate_trajectory(angles_rk4, l1, l2, "RK4")
-# print("Animation de la trajectoire avec la méthode de Runge-Kutta d'ordre 4 terminée.")
-# print()
-
-"""METHODE de Verlet"""
-# plot_trajectory(angles_verlet, l1, l2)
-# print("Animation de la trajectoire avec la méthode de Verlet...")
-# animate_trajectory(angles_verlet, l1, l2, "Verlet")
-# print("Animation de la trajectoire avec la méthode de Verlet terminée.")
-# print()
-
-
-"""COMPARAISON des 3 méthodes"""
-# comparaisonPlot(calcul_trajectoire(angles,l1,l2), calcul_trajectoire(angles_rk4,l1,l2), calcul_trajectoire(angles_verlet,l1,l2))
-# print("Animation de la trajectoire - COMPARAISON...")
-# animate_trajectory_comparison(angles, angles_rk4, angles_verlet, l1, l2, T, N)
-# print("Animation de la trajectoire - COMPARAISON terminée.")
-
-
-"""PART 4 - Chaos"""
-# Conditions initiales et paramètres
-Y0_1 = np.array([10**-8, np.sqrt(2) * 10**-8, 0, 0])
-T = 20
-N = 1000
-
-# Calcul des trajectoires avec la méthode d'Euler explicite
-angles_1, angular_velocities_1, time_points_1 = calculer_trajectoire_pour_conditions_initiales(Y0_1, T, N, l1, l2, m1, m2, method_Euler)
-
-# Graphiques des angles et des vitesses angulaires en fonction du temps pour la première condition initiale
-anglePlot(angles_1, time_points_1)
-angularVelocityPlot(angular_velocities_1, time_points_1)
-
-
-# Nouvelle condition initiale
-Y0_2 = np.array([10**-8, 10**-8, 0, 0])
-
-# Calcul des trajectoires avec la méthode d'Euler explicite
-angles_2, angular_velocities_2, time_points_2 = calculer_trajectoire_pour_conditions_initiales(Y0_2, T, N, l1, l2, m1, m2, method_Euler)
-
-# Graphiques des angles et des vitesses angulaires en fonction du temps pour la deuxième condition initiale
-anglePlot(angles_2, time_points_2)
-angularVelocityPlot(angular_velocities_2, time_points_2)
-
-
-# Étude de la sensibilité pour différentes valeurs de α
-alphas = [10**-9, 10**-7, 0.005, 0.05, 1, 1.2, 1.5, 1.7, 1.9, 2]
-T = 20
-N = 1000
-
-for alpha in alphas:
-    Y0 = np.array([alpha, alpha, 0, 0])
-    angles, angular_velocities, time_points = calculer_trajectoire_pour_conditions_initiales(Y0, T, N, l1, l2, m1, m2, method_Euler)
+while True:
+    print("\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+    print("Sélectionnez une partie du code à exécuter :")
+    print("1. Méthode Euler Explicite")
+    print("2. Méthode RK4")
+    print("3. Méthode de Verlet")
+    print("4. Comparaison des 3 méthodes")
+    print("5. Partie 4 - Chaos")
+    print("0. Quitter")
     
-    # Tracer les graphes des angles et des vitesses angulaires
-    anglePlot(angles, time_points)
-    angularVelocityPlot(angular_velocities, time_points)
+    choice = input("\n>> Votre choix : ")
     
-    # Représentation dans l'espace des phases
-    PhaseSpacePlot(angles, angular_velocities)
+    if choice == "1":
+        """METHODE Euler Explicite"""
+        print("Méthode Euler Explicite sélectionnée")
+        anglePlot(angles, time_points, "Méthode Euler Explicite")
+        angularVelocityPlot(angular_velocities, time_points, "Méthode Euler Explicite")
+        plot_trajectory(angles, l1, l2, "Méthode Euler Explicite")
+        print("Animation de la trajectoire avec la méthode d'Euler explicite...")
+        animate_trajectory(angles, l1, l2,"Euler Explicite")
+        print("Animation de la trajectoire avec la méthode d'Euler explicite terminée.")
+        print()
+        energyEvolution(ET, time_points)
+        
+    elif choice == "2":
+        """METHODE RK4"""
+        print("Méthode RK4 sélectionnée")
+        plot_trajectory(angles_rk4, l1, l2, "Méthode Runge-Kutta d'ordre 4")
+        print("Animation de la trajectoire avec la méthode de Runge-Kutta d'ordre 4...")
+        animate_trajectory(angles_rk4, l1, l2, "RK4")
+        print("Animation de la trajectoire avec la méthode de Runge-Kutta d'ordre 4 terminée.\n")
+        
+    elif choice == "3":
+        """METHODE de Verlet"""
+        print("Méthode de Verlet sélectionnée")
+        plot_trajectory(angles_verlet, l1, l2, "Méthode de Verlet")
+        print("Animation de la trajectoire avec la méthode de Verlet...")
+        animate_trajectory(angles_verlet, l1, l2, "Verlet")
+        print("Animation de la trajectoire avec la méthode de Verlet terminée.\n")
+
+    elif choice == "4":
+        """COMPARAISON des 3 méthodes"""
+        print("Comparaison des 3 méthodes sélectionnée")
+        comparaisonPlot(calcul_trajectoire(angles,l1,l2), calcul_trajectoire(angles_rk4,l1,l2), calcul_trajectoire(angles_verlet,l1,l2))
+        print("Animation de la trajectoire - COMPARAISON...")
+        animate_trajectory_comparison(angles, angles_rk4, angles_verlet, l1, l2, T, N)
+        print("Animation de la trajectoire - COMPARAISON terminée.")
+        
+    elif choice == "5":
+        print("Partie 4 - Chaos sélectionnée")
+        # Conditions initiales et paramètres
+        Y0_1 = np.array([10**-8, np.sqrt(2) * 10**-8, 0, 0])
+        T = 20
+        N = 1000
+
+        # Calcul des trajectoires avec la méthode d'Euler explicite
+        angles_1, angular_velocities_1, time_points_1 = calculer_trajectoire_pour_conditions_initiales(Y0_1, T, N, l1, l2, m1, m2, method_Euler)
+
+        # Graphiques des angles et des vitesses angulaires en fonction du temps pour la première condition initiale
+        anglePlot(angles_1, time_points_1)
+        angularVelocityPlot(angular_velocities_1, time_points_1)
+
+        # Nouvelle condition initiale -------------------------------------------------------
+        Y0_2 = np.array([10**-8, 10**-8, 0, 0])
+
+        # Calcul des trajectoires avec la méthode d'Euler explicite
+        angles_2, angular_velocities_2, time_points_2 = calculer_trajectoire_pour_conditions_initiales(Y0_2, T, N, l1, l2, m1, m2, method_Euler)
+
+        # Graphiques des angles et des vitesses angulaires en fonction du temps pour la deuxième condition initiale
+        anglePlot(angles_2, time_points_2)
+        angularVelocityPlot(angular_velocities_2, time_points_2)
 
 
+        # Étude de la sensibilité pour différentes valeurs de α
+        alphas = [10**-9, 10**-7, 0.005, 0.05, 1, 1.2, 1.5, 1.7, 1.9, 2]
+        T = 20
+        N = 1000
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        for alpha in alphas:
+            Y0 = np.array([alpha, alpha, 0, 0])
+            angles, angular_velocities, time_points = calculer_trajectoire_pour_conditions_initiales(Y0, T, N, l1, l2, m1, m2, method_Euler)
+            
+            # Tracer les graphes des angles et des vitesses angulaires
+            anglePlot(angles, time_points,alpha)
+            angularVelocityPlot(angular_velocities, time_points,alpha)
+            
+            # Représentation dans l'espace des phases
+            PhaseSpacePlot(angles, angular_velocities,alpha)
+        
+    elif choice == "0":
+        print("Fin du programme")
+        break
+        
+    else:
+        print("Choix invalide. Veuillez sélectionner une option valide.")
 
