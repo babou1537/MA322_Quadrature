@@ -5,7 +5,6 @@ Membre du Groupe :
     - Maëva AGUESSY
     - Chloé TONSO
     - Baptiste MATHIEU
-    - Phuong Mai NGUON
 
 Classe 3PSB1
 """
@@ -206,10 +205,12 @@ def plot_trajectory(angle,l1,l2, subtitle=None):
     plt.title('Trajectoire du double pendule')
     plt.legend()
     plt.grid(True)
+
     # if subtitle != None:
     #     plt.suptitle(subtitle)
         # plt.savefig('FIG2_trajectoire_Verlet.png', dpi=600)
     # plt.savefig('trajectory.pdf')
+
     plt.show()
 
 
